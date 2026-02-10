@@ -4,6 +4,11 @@ using UnityEngine.Scripting.APIUpdating;
 public class PlayerControl : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject PlayerBullet;
+    public GameObject BulletPosition1;
+    public GameObject BulletPosition2;
+    
+    
     public float speed;
     void Start()
     {
@@ -13,6 +18,15 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject bullet1 = (GameObject)Instantiate (PlayerBullet);
+            bullet1.transform.position = BulletPosition1.transform.position;
+
+            GameObject bullet2 = (GameObject)Instantiate(PlayerBullet);
+            bullet2.transform.position = BulletPosition2.transform.position;
+
+        }
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
