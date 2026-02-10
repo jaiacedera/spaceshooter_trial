@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject PlayerBullet;
     public GameObject BulletPosition1;
     public GameObject BulletPosition2;
+    public GameObject Explosion;
     
     
     public float speed;
@@ -54,5 +55,21 @@ public class PlayerControl : MonoBehaviour
         pos.y = Mathf.Clamp (pos.y, min.y, max.y);
 
         transform.position = pos;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag"))
+        {
+            PlayExplosion();
+            Destroy(gameObject);
+        }
+    }
+
+    void PlayExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(Explosion);
+
+        explosion.transform.position = transform.position;
     }
 }

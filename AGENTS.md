@@ -2,7 +2,7 @@
 - Project name: trial_spaceshooter
 - Unity version: Unity 6000.3.7f1
 - Active game object:
-  - Name: EnemyGun
-  - Tag: Untagged
+  - Name: Enemy
+  - Tag: EnemyShipTag
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
