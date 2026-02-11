@@ -24,8 +24,10 @@ public class PlayerControl : MonoBehaviour
         lives = Maxlives;
 
         TextLives.text = lives.ToString();
+        transform.position = new Vector2(0, 0);
 
         gameObject.SetActive(true);
+
     }
     
     void Start()
