@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject enemySpawner;
     public GameObject GameOver;
     public GameObject TextScore;
+    public GameObject TextTime;
     
     public enum GameManagerState
     {
@@ -46,9 +47,13 @@ public class GameManager : MonoBehaviour
 
             enemySpawner.GetComponent<EnemySpawner>().ScheduleEnemySpawner();
 
+            TextTime.GetComponent<TimeCounter>().StartTimeCounter();
+
             break;
 
         case GameManagerState.GameOver:
+
+            TextTime.GetComponent<TimeCounter>().StopTimeCounter();
 
             enemySpawner.GetComponent<EnemySpawner>().UnscheduleEnemySpawner();
 
