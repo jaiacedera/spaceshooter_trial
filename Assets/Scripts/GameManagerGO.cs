@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
             GameOver.SetActive(true);
 
-            Invoke("ChangeToOpeningState", 8f);
+            Invoke("ChangeToOpeningState", 4f);
             break;
 
         }
