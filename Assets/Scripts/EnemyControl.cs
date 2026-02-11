@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
+    GameObject TextScore;
     public GameObject Explosion;
+    private bool isDestroyed = false;
 
     float speed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         speed = 2f;
+        TextScore = GameObject.FindGameObjectWithTag("ScoreTag");
     }
 
     // Update is called once per frame
@@ -28,11 +31,15 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
+        if (isDestroyed) return;
         if ((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag"))
         {
+            isDestroyed = true;
             PlayExplosion();
+
+            TextScore.GetComponent<GameScore>().Score += 100;
             
             Destroy(gameObject);
         }

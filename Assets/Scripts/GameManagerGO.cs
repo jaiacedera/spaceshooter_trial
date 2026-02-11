@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerShip;
     public GameObject enemySpawner;
     public GameObject GameOver;
+    public GameObject TextScore;
     
     public enum GameManagerState
     {
@@ -36,6 +37,9 @@ public class GameManager : MonoBehaviour
             break;
 
         case GameManagerState.Gameplay:
+
+            TextScore.GetComponent<GameScore>().Score = 0;
+                
             playButton.SetActive(false);
 
             playerShip.GetComponent<PlayerControl>().Init();

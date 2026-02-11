@@ -40,6 +40,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            gameObject.GetComponent<AudioSource>().Play();
+
             GameObject bullet1 = (GameObject)Instantiate (PlayerBullet);
             bullet1.transform.position = BulletPosition1.transform.position;
 
