@@ -1,16 +1,33 @@
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject GameManagerGO;
+    
     public GameObject PlayerBullet;
     public GameObject BulletPosition1;
     public GameObject BulletPosition2;
     public GameObject Explosion;
-    
+
+    public Text TextLives;
+
+    const int Maxlives = 3;
+    int lives;
     
     public float speed;
+    
+    public void Init()
+    {
+        lives = Maxlives;
+
+        TextLives.text = lives.ToString();
+
+        gameObject.SetActive(true);
+    }
+    
     void Start()
     {
         
@@ -62,7 +79,16 @@ public class PlayerControl : MonoBehaviour
         if((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag"))
         {
             PlayExplosion();
-            Destroy(gameObject);
+
+            lives--;
+            TextLives.text = lives.ToString();
+
+            if (lives == 0)
+            {
+                GameManagerGO.GetComponent<GameManager>().SetGameManagerState(GameManager.GameManagerState.GameOver);
+                gameObject.SetActive (false);
+            }
+            
         }
     }
 

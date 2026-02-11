@@ -1,0 +1,75 @@
+using UnityEngine;
+using System.Collections;
+
+public class GameManager : MonoBehaviour
+{
+    public GameObject playButton;
+    public GameObject playerShip;
+    public GameObject enemySpawner;
+    public GameObject GameOver;
+    
+    public enum GameManagerState
+    {
+        Opening,
+        Gameplay,
+        GameOver,
+    }
+
+    GameManagerState GMState;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        GMState = GameManagerState.Opening;
+    }
+
+    // Update is called once per frame
+    void UpdateGameManagerState()
+    {
+        switch(GMState)
+        {
+        case GameManagerState.Opening:
+
+                GameOver.SetActive(false);
+                playButton.SetActive(true);
+
+            break;
+
+        case GameManagerState.Gameplay:
+            playButton.SetActive(false);
+
+            playerShip.GetComponent<PlayerControl>().Init();
+
+            enemySpawner.GetComponent<EnemySpawner>().ScheduleEnemySpawner();
+
+            break;
+
+        case GameManagerState.GameOver:
+
+            enemySpawner.GetComponent<EnemySpawner>().UnscheduleEnemySpawner();
+
+            GameOver.SetActive(true);
+
+            Invoke("ChangeToOpeningState", 8f);
+            break;
+
+        }
+    }
+
+    public void SetGameManagerState(GameManagerState state)
+    {
+        GMState = state;
+        UpdateGameManagerState();
+    }
+
+    public void StartGamePlay()
+    {
+        GMState = GameManagerState.Gameplay;
+        UpdateGameManagerState();
+    }
+
+    public void ChangeToOpeningState()
+    {
+        SetGameManagerState(GameManagerState.Opening);
+    }
+}
