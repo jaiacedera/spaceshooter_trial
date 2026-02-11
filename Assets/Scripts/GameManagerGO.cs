@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject GameOver;
     public GameObject TextScore;
     public GameObject TextTime;
+    public GameObject GameTitle;
     
     public enum GameManagerState
     {
@@ -32,8 +33,11 @@ public class GameManager : MonoBehaviour
         {
         case GameManagerState.Opening:
 
-                GameOver.SetActive(false);
-                playButton.SetActive(true);
+            GameOver.SetActive(false);
+
+            GameTitle.SetActive(true);
+
+            playButton.SetActive(true);
 
             break;
 
@@ -42,6 +46,8 @@ public class GameManager : MonoBehaviour
             TextScore.GetComponent<GameScore>().Score = 0;
                 
             playButton.SetActive(false);
+
+            GameTitle.SetActive(false);
 
             playerShip.GetComponent<PlayerControl>().Init();
 
